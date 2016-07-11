@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
             NumberFormat.getPercentInstance();
 
     private double loanAmount = 0.0; // the amount I have to (entered by the user)
-    private double rate = 0.15; // rate I negociated for  my loan percentage
-    private int years = 1; //initial number of years for my loan
+    private double rate = 2; // rate I negociated for  my loan percentage
+    private int years = 15; //initial number of years for my loan
     private TextView amountTextView; // shows formatted bill amount
     private TextView rateTextView; // shows rate Amount I should negociate
     private TextView yearsTextView; // shows the number of years I expect to pay ...
@@ -57,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
         // set percentSeekBar's OnSeekBarChangeListener
         SeekBar rateSeekBar =
                 (SeekBar) findViewById(R.id.rateSeekBar);
-        rateSeekBar.setOnSeekBarChangeListener(rateBarListener);
+        rateSeekBar.setOnSeekBarChangeListener(rateBarListener); //Problème à la définition du rateSeekBarListener !!!!
 
         // set percentSeekBar's OnSeekBarChangeListener
         SeekBar yearsSeekBar =
                 (SeekBar) findViewById(R.id.yearsSeekBar);
-        rateSeekBar.setOnSeekBarChangeListener(yearsBarListener);
+        yearsSeekBar.setOnSeekBarChangeListener(yearsBarListener);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -77,10 +77,11 @@ public class MainActivity extends AppCompatActivity {
         rateTextView.setText(percentFormat.format(rate));
 
         // format rate and display in rateTextView
-        yearsTextView.setText(new Integer(years));
-        // calculate the tip and total
+        Integer yearsInt = new Integer(years);
+        yearsTextView.setText(yearsInt.toString());
+        // calculate  what I will have to pay monthly ...
         double monthlyamount = Math.pow(loanAmount * rate / (1 - (1 + rate)), -years * 12.0);
-
+        ///show it to me !!!
         monthlyTextView.setText(currencyFormat.format(monthlyamount));
     }
 

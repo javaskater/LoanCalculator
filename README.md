@@ -25,3 +25,9 @@ SeekBar rateSeekBar =
     * et 1 année pour la durée de remboursement
 2 Il me déduit à partir de [La Formule Magigue]()
   * Je parle de la formula magique plus sous [page formule](docs/FORMULES.md)
+# Le Debugging !!
+## Plantage au démarrage...
+* Attenttion de bin déinstaller l'application de l'émulateur
+* avant de relancer le processus de debugging !!!
+  * il a besoin de créer une nouvelle iinsstance
+  * synchronisée avec le apk qui vient être construit!!!

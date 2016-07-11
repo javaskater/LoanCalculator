@@ -5,8 +5,7 @@
 * Avec:
   * *B4* : Le montant du prêt
   * *C4* : Le taux fixe
-  * *D4* : La durée annuelle _Le nombre d'années de Remboursement_
-
+  * *D4* : La durée annuelle _Le nombre d'années de Remboursement
 #### Mais qu'est ce que le VPM d'Excel
 * J'ai trouvé le forumle sur [Un Forum Finance](http://forum.actufinance.fr/formule-mathematique-de-vpm-vc-et-va-P45065/)
 * La réponse proposée :
@@ -27,6 +26,13 @@ formule marche (avec t > 0)
 
 > Pour le reste, il suffit de refaire les équations ...
 >  Bonne chance []
+* Cequi donne en java:
+```java
+// calculate  what I will have to pay monthly ...
+ double monthlyamount = Math.pow(loanAmount * rate / (1 - (1 + rate)), -years * 12.0);
+///show it to me !!!
+monthlyTextView.setText(currencyFormat.format(monthlyamount));
+```
 
 ## Combien me coûtera mensuellementl'assurance  ?
 ### la formule de Nicolas:

@@ -42,13 +42,13 @@
       android:layout_height="wrap_content"
       android:textAppearance="?android:attr/textAppearanceMedium"
       android:text="@string/rate_percentage"
-      android:id="@+id/percentTextView"
+      android:id="@+id/rateTextView"
       android:layout_gravity="center_vertical|right"/>
 
    <SeekBar
       android:layout_width="wrap_content"
       android:layout_height="@dimen/seekbar_height"
-      android:id="@+id/percentSeekBar"
+      android:id="@+id/rateSeekBar"
       android:indeterminate="false"
       android:max="30"
       android:progress="15"
