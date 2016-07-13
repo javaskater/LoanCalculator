@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             NumberFormat.getPercentInstance();
 
     private double loanAmount = 0.0; // the amount I have to (entered by the user)
-    private double rate = 2; // rate I negociated for  my loan percentage
+    private double rate = 0.02; // rate I negociated for  my loan percentage initially 2%
     private int years = 15; //initial number of years for my loan
     private TextView amountTextView; // shows formatted bill amount
     private TextView rateTextView; // shows rate Amount I should negociate
@@ -78,21 +78,20 @@ public class MainActivity extends AppCompatActivity {
     ** following the underneath formula !!!
     ** http://forum.actufinance.fr/formule-mathematique-de-vpm-vc-et-va-P45065/
      */
-    private void calculate() {
-        // format rate and display in rateTextView
-        rateTextView.setText(percentFormat.format(rate));
+    private void calculateAndDisplay() {
 
-        // format rate and display in rateTextView
-        Integer yearsInt = new Integer(years);
-        yearsTextView.setText(yearsInt.toString());
         /* calculate  what I will have to pay monthly ...
         * following http://stackoverflow.com/questions/29804843/formula-for-calculating-interest-python
+        * tested on Python with:
+        * Vd=100000
+        * n=15
+        * t=2/100
+        * a = Vd*t/(1-pow(1+t,-n))
+        * m=a/12
          */
+        double yearlyPayments = loanAmount * rate / (1-Math.pow(1+rate, -years));
+        double monthlyPayments = yearlyPayments/12;
 
-        double numberOfPayments=12 * years;
-        double interest=rate/100/12;
-        double loan=loanAmount;
-        double monthlyPayments = loan * (interest * Math.pow(1 + interest,numberOfPayments)) / (Math.pow(1 + interest, numberOfPayments - 1));
         ///show it to me !!!
         monthlyTextView.setText(currencyFormat.format(monthlyPayments));
     }
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                calculate();
+                calculateAndDisplay();
 
             }
 
@@ -120,8 +119,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress,
                                               boolean fromUser) {
-                    rate = progress / 100.0; // set percent based on progress
-                    calculate(); // calculate and display tip and total
+                    rate = 0.005 + progress / 1000.0; // the progess is configured to go from 0 to 45 and we wan a rate from 0.5% to 5%
+                    // format rate and display in rateTextView
+                    rateTextView.setText(percentFormat.format(rate));
+                    calculateAndDisplay(); // calculate and display loanamount
                 }
 
                 @Override
@@ -140,8 +141,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress,
                                               boolean fromUser) {
-                    years = progress; // set percent based on progress
-                    calculate(); // calculate and display tip and total
+                    years = 1 + progress; // set years based on progress
+                    // format rate and display in rateTextView
+                    Integer yearsInt = new Integer(years);
+                    yearsTextView.setText(yearsInt.toString()+" year(s)");
+                    calculateAndDisplay(); // calculate and display tip and total
                 }
 
                 @Override

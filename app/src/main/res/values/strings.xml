@@ -2,6 +2,6 @@
    <string name="app_name">Loan Calculator (France)</string>
    <string name="enter_amount">Enter Amount</string>
    <string name="rate_percentage">2%</string>
-   <string name="years">1 year(s)</string>
+   <string name="years">15 year(s)</string>
    <string name="monthly">Montly</string>
 </resources>

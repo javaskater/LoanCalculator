@@ -25,16 +25,16 @@
 formule marche (avec t > 0)
 
 > Pour le reste, il suffit de refaire les équations ...
->  Bonne chance []
-### une autre formule trouvée:
-* J'ai testé à partir de ce [ce Forum StackOverflow](http://stackoverflow.com/questions/29804843/formula-for-calculating-interest-python)
-  * ce qui donne comme
-```python
-numberOfPayments=60
-interest=1.5/100/12
-loan=100000
-monthlyPayments = loan * (interest * (1 + interest) ** numberOfPayments) / ((1 + interest) ** numberOfPayments - 1)
-print (round(monthlyPayments))
+>  Bonne chance
+
+* ce qui donne en Python:
+``` python
+Vd=100000
+n=15
+t=2/100
+a = Vd*t/(1-pow(1+t,-n))
+m=a/12
+print(m) #ce qui donne 648.5456020853672
 ```
 * Cequi donne en java:
 ```java
@@ -43,7 +43,8 @@ print (round(monthlyPayments))
 ///show it to me !!!
 monthlyTextView.setText(currencyFormat.format(monthlyamount));
 ```
-* le résultat de _1731 €_ est à comparer avec ce que produit la feuille Excel de Nicolas !!!
+* le résultat de _648,5 €_ est à comparer avec ce que produit la feuille Excel de Nicolas !!!
+  * à savoir __643,5 €__
 ## Combien me coûtera mensuellementl'assurance  ?
 ### la formule de Nicolas:
 * ___=F4 x  $B4/(12 x 100)___

@@ -66,8 +66,8 @@
       android:layout_row="1"
       android:layout_column="1"
       android:layout_columnSpan="3"
-      android:max="5"
-      android:progress="1"
+      android:max="45"
+      android:progress="25"
       android:layout_gravity="fill_horizontal"/>
 
    <TextView
@@ -88,8 +88,8 @@
        android:indeterminate="false"
        android:layout_column="1"
        android:layout_columnSpan="3"
-       android:max="30"
-       android:progress="15"
+       android:max="29"
+       android:progress="14"
        android:layout_gravity="fill_horizontal"/>
 
    <TextView
