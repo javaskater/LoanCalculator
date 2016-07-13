@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView rateTextView; // shows rate Amount I should negociate
     private TextView yearsTextView; // shows the number of years I expect to pay ...
     private TextView monthlyTextView; // shows calculated value have to pay (to be compared with my actual rent)
+
+    private Button button; //button to initiate the Amount value calculation
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         SeekBar yearsSeekBar =
                 (SeekBar) findViewById(R.id.yearsSeekBar);
         yearsSeekBar.setOnSeekBarChangeListener(yearsBarListener);
+
+        addListenerOnButton();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -79,10 +85,32 @@ public class MainActivity extends AppCompatActivity {
         // format rate and display in rateTextView
         Integer yearsInt = new Integer(years);
         yearsTextView.setText(yearsInt.toString());
-        // calculate  what I will have to pay monthly ...
-        double monthlyamount = Math.pow(loanAmount * rate / (1 - (1 + rate)), -years * 12.0);
+        /* calculate  what I will have to pay monthly ...
+        * following http://stackoverflow.com/questions/29804843/formula-for-calculating-interest-python
+         */
+
+        double numberOfPayments=12 * years;
+        double interest=rate/100/12;
+        double loan=loanAmount;
+        double monthlyPayments = loan * (interest * Math.pow(1 + interest,numberOfPayments)) / (Math.pow(1 + interest, numberOfPayments - 1));
         ///show it to me !!!
-        monthlyTextView.setText(currencyFormat.format(monthlyamount));
+        monthlyTextView.setText(currencyFormat.format(monthlyPayments));
+    }
+
+    public void addListenerOnButton() {
+
+        button = (Button) findViewById(R.id.calcAmount);
+
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                calculate();
+
+            }
+
+        });
+
     }
 
     // listener object for the SeekBar's progress changed events
@@ -139,8 +167,6 @@ public class MainActivity extends AppCompatActivity {
                 amountTextView.setText("");
                 loanAmount = 0.0;
             }
-
-            calculate(); // update the tip and total TextViews
         }
 
         @Override

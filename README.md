@@ -31,3 +31,6 @@ SeekBar rateSeekBar =
 * avant de relancer le processus de debugging !!!
   * il a besoin de créer une nouvelle iinsstance
   * synchronisée avec le apk qui vient être construit!!!
+
+# Tout ce qui me reste à faire
+## cf. [page des TODOS](docs/TODO.md)
