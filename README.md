@@ -1,5 +1,7 @@
 # LoanCalculator
-## Les éléments de la vuue
+
+## Les éléments de la vue
+
 ### les vues texte:
 ``` java
   private TextView amountTextView; // shows formatted bill amount
@@ -25,7 +27,9 @@ SeekBar rateSeekBar =
     * et 1 année pour la durée de remboursement
 2 Il me déduit à partir de [La Formule Magigue]()
   * Je parle de la formula magique plus sous [page formule](docs/FORMULES.md)
+
 # Le Debugging !!
+
 ## Plantage au démarrage...
 * Attenttion de bin déinstaller l'application de l'émulateur
 * avant de relancer le processus de debugging !!!
@@ -33,4 +37,5 @@ SeekBar rateSeekBar =
   * synchronisée avec le apk qui vient être construit!!!
 
 # Tout ce qui me reste à faire
+
 ## cf. [page des TODOS](docs/TODO.md)

@@ -56,3 +56,8 @@ monthlyTextView.setText(currencyFormat.format(monthlyamount));
   * *B4* : Le montant du prêt
   * *D4* : La durée annuelle _Le nombre d'années de Remboursement_
   * *E4* : La mensualité du prêt calculée plus haut !!!!
+
+### à porter sous Android
+
+# still TODO
+* présenter les différentes dépenses de façon structurée !!!
