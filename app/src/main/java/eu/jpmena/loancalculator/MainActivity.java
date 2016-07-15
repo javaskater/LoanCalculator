@@ -121,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
                                               boolean fromUser) {
                     rate = 0.005 + progress / 1000.0; // the progess is configured to go from 0 to 45 and we wan a rate from 0.5% to 5%
                     // format rate and display in rateTextView
-                    rateTextView.setText(percentFormat.format(rate));
+                    //rateTextView.setText(percentFormat.format(rate));
+                    String rateInPercent =  String.format( "%.2f", rate*100.0 );
+                    rateTextView.setText(rateInPercent+"%");
                     calculateAndDisplay(); // calculate and display loanamount
                 }
 
