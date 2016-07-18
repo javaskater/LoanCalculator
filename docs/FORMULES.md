@@ -6,6 +6,7 @@
   * *B4* : Le montant du prêt
   * *C4* : Le taux fixe
   * *D4* : La durée annuelle _Le nombre d'années de Remboursement
+
 #### Mais qu'est ce que le VPM d'Excel
 * J'ai trouvé le forumle sur [Un Forum Finance](http://forum.actufinance.fr/formule-mathematique-de-vpm-vc-et-va-P45065/)
 * La réponse proposée :
@@ -27,21 +28,47 @@ formule marche (avec t > 0)
 > Pour le reste, il suffit de refaire les équations ...
 >  Bonne chance
 
-* ce qui donne en Python:
-``` python
-Vd=100000
-n=15
-t=2/100
-a = Vd*t/(1-pow(1+t,-n))
-m=a/12
-print(m) #ce qui donne 648.5456020853672
+* ce qui donne en Javascript:
+
+#### J'ai retrouvé la formule dans le code source du site [GuideDuCredit.com](http://www.guideducredit.com/pret-immobilier/simulation-pret-immobilier/simulation-mensualites.php#)
+* Plus particulièrement dans code Javascrpt de la page principale
+  * à partir de la ligne 1830  
+
+``` javascript
+ta = taux_champ / 100;
+tm = ta / 12;
+
+mens = (montant_pret) * (tm) / (1 - Math.pow(1/(1+tm),12*duree_emprunt));
+taux_assurance_mensuel = (((montant_pret * 0.36)/100) / 12);
+
+taux_assurance_annuel = (taux_assurance_mensuel * 12 * duree_emprunt);
+
+mens += taux_assurance_mensuel;
+mens = Math.round(mens);
+
+s_mens = inttostr(mens);
+s_cout = inttostr((mens * 12 * duree_emprunt) - montant_pret);
+
+$("#idmens").text(s_mens);
+$("#idcout").text(s_cout);
+$("#taux_mensuel").text(inttostr(taux_assurance_mensuel));
+$("#taux_annuel").text(inttostr(taux_assurance_annuel));
 ```
 * Cequi donne en java:
 ```java
-// calculate  what I will have to pay monthly ...
- double monthlyamount = Math.pow(loanAmount * rate / (1 - (1 + rate)), -years * 12.0);
-///show it to me !!!
-monthlyTextView.setText(currencyFormat.format(monthlyamount));
+private void calculateAndDisplay() {
+
+        /* calculate  what I will have to pay monthly ...
+         * ta = taux_champ / 100;
+		 * tm = ta / 12;
+		 * mens = (montant_pret) * (tm) / (1 - Math.pow(1/(1+tm),12*duree_emprunt));
+         */
+        double monthlyrate=rate/12.0; //that is the tm above
+        double monthlyPayments = (loanAmount * monthlyrate) / (1-Math.pow(1/(1+monthlyrate), 12 * years));
+
+        ///show it to me !!!
+        monthlyTextView.setText(currencyFormat.format(monthlyPayments));
+    }
 ```
 * le résultat de _648,5 €_ est à comparer avec ce que produit la feuille Excel de Nicolas !!!
   * à savoir __643,5 €__

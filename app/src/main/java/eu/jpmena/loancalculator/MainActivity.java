@@ -81,16 +81,12 @@ public class MainActivity extends AppCompatActivity {
     private void calculateAndDisplay() {
 
         /* calculate  what I will have to pay monthly ...
-        * following http://stackoverflow.com/questions/29804843/formula-for-calculating-interest-python
-        * tested on Python with:
-        * Vd=100000
-        * n=15
-        * t=2/100
-        * a = Vd*t/(1-pow(1+t,-n))
-        * m=a/12
+         * ta = taux_champ / 100;
+		 * tm = ta / 12;
+		 * mens = (montant_pret) * (tm) / (1 - Math.pow(1/(1+tm),12*duree_emprunt));
          */
-        double yearlyPayments = loanAmount * rate / (1-Math.pow(1+rate, -years));
-        double monthlyPayments = yearlyPayments/12;
+        double monthlyrate=rate/12.0; //that is the tm above
+        double monthlyPayments = (loanAmount * monthlyrate) / (1-Math.pow(1/(1+monthlyrate), 12 * years));
 
         ///show it to me !!!
         monthlyTextView.setText(currencyFormat.format(monthlyPayments));
